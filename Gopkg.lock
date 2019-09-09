@@ -2,16 +2,58 @@
 
 
 [[projects]]
+  name = "github.com/beorn7/perks"
+  packages = ["quantile"]
+  revision = "37c8de3658fcb183f997c4e13e8337516ab753e6"
+  version = "v1.0.1"
+
+[[projects]]
   name = "github.com/coreos/go-systemd"
   packages = ["activation"]
   revision = "e64a0ec8b42a61e2a9801dc1d0abe539dea79197"
   version = "v20"
 
 [[projects]]
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  revision = "6c65a5562fc06764971b7c5d05c76c75e84bdbf7"
+  version = "v1.3.2"
+
+[[projects]]
   name = "github.com/konsorten/go-windows-terminal-sequences"
   packages = ["."]
   revision = "f55edac94c9bbba5d6182a4be46d86a2c9b5b50e"
   version = "v1.0.2"
+
+[[projects]]
+  name = "github.com/matttproud/golang_protobuf_extensions"
+  packages = ["pbutil"]
+  revision = "c12348ce28de40eed0136aa2b644d0ee0650e56c"
+  version = "v1.0.1"
+
+[[projects]]
+  name = "github.com/prometheus/client_golang"
+  packages = ["prometheus","prometheus/internal","prometheus/promhttp"]
+  revision = "170205fb58decfd011f1550d4cfb737230d7ae4f"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/prometheus/client_model"
+  packages = ["go"]
+  revision = "14fe0d1b01d4d5fc031dd4bec1823bd3ebbe8016"
+
+[[projects]]
+  name = "github.com/prometheus/common"
+  packages = ["expfmt","internal/bitbucket.org/ww/goautoneg","model"]
+  revision = "31bed53e4047fd6c510e43a941f90cb31be0972a"
+  version = "v0.6.0"
+
+[[projects]]
+  name = "github.com/prometheus/procfs"
+  packages = [".","internal/fs","internal/util"]
+  revision = "00ec24a6a2d86e7074629c8384715dbb05adccd8"
+  version = "v0.0.4"
 
 [[projects]]
   name = "github.com/sirupsen/logrus"
@@ -22,12 +64,12 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
-  packages = ["unix"]
+  packages = ["unix","windows"]
   revision = "f460065e899abee61eb86816fd1fd684ea5a0f26"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "97fdb80970aa69d5b32b742e8967b54a2a79f34ca2c73168c6311dfe46e025e8"
+  inputs-digest = "a47f6010ec0f6197f9cd3d56aa8ad58494660e7afda4228651af92302e6fb415"
   solver-name = "gps-cdcl"
   solver-version = 1
