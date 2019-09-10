@@ -23,7 +23,7 @@ func (app *App) serveNVMeDeviceInfo(l net.Listener) {
 		if err != nil {
 			log.Fatal("accept error:", err)
 		}
-
+		log.Info("Handling incoming connection on unix socket")
 		app.handleConnection(conn)
 	}
 }
@@ -103,6 +103,7 @@ func (app *App) getNVMeDevices() ([]NVMeDevice, error) {
 }
 
 func (app *App) getSmartLog(device string) map[string]int {
+	log.Info("Querying smart log from ", device)
 	out, err := exec.Command(app.config.nvmeExecutablePath, "smart-log", device, "-o", "json").Output()
 	if err != nil {
 		log.Error("unable to execute nvme smart-log command", err)
