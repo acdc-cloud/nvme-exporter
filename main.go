@@ -26,7 +26,10 @@ type NVMeDeviceInfo struct {
 type NVMeDeviceInfoList []NVMeDeviceInfo
 
 func main() {
+
 	config := loadConfig()
+
+	log.Info("NVMe exporter is starting. Listening on ", config.listenAddress)
 
 	registry := configureRegistry(config)
 
