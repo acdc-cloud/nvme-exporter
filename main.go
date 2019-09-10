@@ -39,7 +39,7 @@ func main() {
 
 func loadConfig() *appConfig {
 	socketPath := flag.String("socket-path", "/var/run/nvme_exporter.sock", "Path to UNIX socket from which to read NVMe device info")
-	listenAddress := flag.String("listen-address", ":9110", "Path to UNIX socket from which to read NVMe device info")
+	listenAddress := flag.String("listen-address", ":9110", "The address to listen on")
 	flag.Parse()
 
 	return &appConfig{
