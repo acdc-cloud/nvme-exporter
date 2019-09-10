@@ -1,6 +1,9 @@
 package main
 
 import (
+	"encoding/json"
+	"net"
+
 	"github.com/prometheus/client_golang/prometheus"
 	log "github.com/sirupsen/logrus"
 )
@@ -42,4 +45,31 @@ func processDeviceInfo(deviceInfo NVMeDeviceInfo, channel chan<- prometheus.Metr
 		)
 
 	}
+}
+
+func connectToUnixSocket(socketPath string) net.Conn {
+	conn, err := net.Dial("unix", socketPath)
+	if err != nil {
+		log.Fatal("error dialing to unix socket:", err)
+	}
+	return conn
+}
+
+func readFromSocket(conn net.Conn) []byte {
+	buf := make([]byte, 256*1024)
+	n, err := conn.Read(buf[:])
+	if err != nil {
+
+	}
+	return buf[:n]
+}
+
+func unmarshal(bytes []byte) NVMeDeviceInfoList {
+	deviceInfoList := NVMeDeviceInfoList{}
+	err := json.Unmarshal(bytes, &deviceInfoList)
+	if err != nil {
+		log.Error("error unmarshalling deviceInfoList json", err)
+		return NVMeDeviceInfoList{}
+	}
+	return deviceInfoList
 }
