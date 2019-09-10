@@ -9,24 +9,24 @@ type NVMeDeviceInfoCollector struct {
 	socketPath string
 }
 
-func (c NVMeDeviceInfoCollector) Describe(ch chan<- *prometheus.Desc) {
-	prometheus.DescribeByCollect(c, ch)
+func (collector NVMeDeviceInfoCollector) Describe(channel chan<- *prometheus.Desc) {
+	prometheus.DescribeByCollect(collector, channel)
 }
 
-func (c NVMeDeviceInfoCollector) Collect(ch chan<- prometheus.Metric) {
+func (collector NVMeDeviceInfoCollector) Collect(channel chan<- prometheus.Metric) {
 	log.Info("Collecting NVMe info")
-	conn := connectToUnixSocket(c.socketPath)
+	conn := connectToUnixSocket(collector.socketPath)
 	bytes := readFromSocket(conn)
 
 	deviceInfoList := unmarshal(bytes)
 	for _, deviceInfo := range deviceInfoList {
-		processDeviceInfo(deviceInfo, ch)
+		processDeviceInfo(deviceInfo, channel)
 	}
 	conn.Close()
 
 }
 
-func processDeviceInfo(deviceInfo NVMeDeviceInfo, ch chan<- prometheus.Metric) {
+func processDeviceInfo(deviceInfo NVMeDeviceInfo, channel chan<- prometheus.Metric) {
 	labels := prometheus.Labels{
 		"device": deviceInfo.DevicePath,
 		"model":  deviceInfo.ModelNumber,
@@ -35,7 +35,7 @@ func processDeviceInfo(deviceInfo NVMeDeviceInfo, ch chan<- prometheus.Metric) {
 
 	for key, value := range deviceInfo.SmartLog {
 		desc := prometheus.NewDesc(key, "", nil, labels)
-		ch <- prometheus.MustNewConstMetric(
+		channel <- prometheus.MustNewConstMetric(
 			desc,
 			prometheus.GaugeValue,
 			float64(value),
