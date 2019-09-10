@@ -22,7 +22,7 @@ func loadConfig() *appConfig {
 
 func main() {
 
-	log.Info("NVMe exporter helper is starting...")
+	log.Info("NVMe exporter device info server is starting...")
 
 	config := loadConfig()
 
