@@ -1,3 +1,5 @@
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+
 # NVMe exporter
 NVMe exporter written in golang. The exporter has two binaries
 
